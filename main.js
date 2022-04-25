@@ -1,10 +1,10 @@
 const state = {
-  rating: 0
+  rating: 1
 }
 
 const submit_rating = document.querySelector('.js-submit')
 const rating_display = document.querySelector('.rating')
-const rating_buttons = [...document.querySelectorAll('.rating-button')]
+const rating_buttons = [...document.querySelectorAll('input[name="rating"]')]
 
 submit_rating.addEventListener('click', function () {
   rating_display.textContent = state.rating
@@ -14,21 +14,7 @@ submit_rating.addEventListener('click', function () {
 })
 
 for (const item of rating_buttons) {
-  item.addEventListener('click', updateRating);
-}
-
-function updateRating(event) {
-  if (state.rating === (rating_buttons.indexOf(event.target) + 1)) {
-    state.rating = 0;
-  }
-  else {
-    state.rating = rating_buttons.indexOf(event.target) + 1
-  }
-  for (const item of rating_buttons) {
-    if (item === event.target) {
-      item.classList.toggle('selected')
-      continue
-    }
-    item.classList.remove('selected')
-  }
+  item.addEventListener('change', function(event) {
+    state.rating = event.target.value;
+  });
 }
